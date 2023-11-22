@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 /* 
-entry: 프로덕션 빌드시 트랜스파일링 할 최초 진입점 설정
+entry: 프로덕션 빌드 시 의존성 그래프를 생성할 최초 진입점 설정, 이를 통해 모듈간의 의존 관계를 파악한다.
 output: 빌드 결과물의 경로설정과 파일 이름
 resolve: 모듈들이 어떻게 해석되는지를 웹팩에게 알려주는 설정 (extensions: import 구문에서 파일 확장자 생략 설정)
 devServer: 웹팩의 빌드 파일이 변경 되었을 때 매번 웹팩 명령어를 실행하지 않아도 변경사항을 웹팩으로 빌드한 후 브라우저를 새로고침한다.
