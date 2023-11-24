@@ -67,6 +67,7 @@ module.exports = {
     'react/require-default-props': 'off',
     'default-param-last': 'off',
     "no-shadow": "off",
-    "@typescript-eslint/no-shadow": ["error"]
+    "@typescript-eslint/no-shadow": ["error"],
+    "react/jsx-pascal-case": [2, { allowNamespace: true }]
   },
 };
