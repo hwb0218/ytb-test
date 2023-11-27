@@ -1,9 +1,10 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
+const Dotenv = require('dotenv-webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-module.exports = {
+module.exports = () => ({
   entry: {
     main: './src/index.tsx',
   },
@@ -42,11 +43,14 @@ module.exports = {
     ],
   },
   plugins: [
+    new Dotenv({
+      path: path.resolve(__dirname, `.env.${process.env.NODE_ENV ?? 'local'}`),
+    }),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'public/index.html'),
     }),
   ],
-};
+});
 
 /*
 entry: 빌드 시 의존성 그래프를 생성할 최초 진입점 설정, 이를 통해 모듈간의 의존 관계를 파악한다.
