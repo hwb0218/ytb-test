@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate, createSearchParams } from 'react-router-dom';
 
 import Input from '../common/input';
 import Wrapper from '../common/wrapper';
@@ -6,8 +7,19 @@ import Wrapper from '../common/wrapper';
 export default function Searchbar() {
   const [text, setText] = useState('');
 
+  const navigate = useNavigate();
+
   const handleSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!text.trim()) {
+      return;
+    }
+
+    navigate({
+      pathname: '/results',
+      search: `?${createSearchParams({ search_query: text.trim() })}`,
+    });
   };
 
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,7 +40,7 @@ export default function Searchbar() {
           className="py-2 ps-4 flex-1 rounded-l-full"
         />
         <Wrapper className="flex border-l-[1px] border-gray-300 bg-gray-100">
-          <Input.button className="px-4">버튼</Input.button>
+          <Input.button className="px-4" type="submit">버튼</Input.button>
         </Wrapper>
       </Input>
     </Wrapper>
