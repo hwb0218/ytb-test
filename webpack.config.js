@@ -8,6 +8,7 @@ module.exports = () => ({
   entry: {
     main: './src/index.tsx',
   },
+  devtool: 'eval-cheap-module-source-map',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].[chunkhash].js',
