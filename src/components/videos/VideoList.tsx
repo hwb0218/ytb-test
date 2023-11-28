@@ -2,14 +2,12 @@ import { useRef } from 'react';
 
 import Video from '.';
 
-import { Item } from '../../types/videos';
+import { useInfiniteQueryFetchVideos } from '../../hooks/videos';
 
-type VideoListProps = {
-  videos: Item[];
-  onLoadMoreVideos: () => void;
-}
+export default function VideoList() {
+  // const { videos, loadMoreVideos } = useFetchVideos();
+  const { videos, loadMoreVideos } = useInfiniteQueryFetchVideos();
 
-export default function VideoList({ videos, onLoadMoreVideos }: VideoListProps) {
   const container = useRef<HTMLUListElement>(null);
 
   return (
@@ -19,7 +17,7 @@ export default function VideoList({ videos, onLoadMoreVideos }: VideoListProps) 
           {video.snippet.title}
         </Video.item>
       ))}
-      <button type="button" className="text-blue-600" onClick={() => onLoadMoreVideos()}>더보기</button>
+      <button type="button" className="text-blue-600 col-span-full" onClick={loadMoreVideos}>더보기</button>
     </Video>
   );
 }
