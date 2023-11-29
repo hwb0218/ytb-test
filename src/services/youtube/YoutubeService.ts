@@ -10,7 +10,7 @@ export default class ApiService {
     const params = {
       part: 'snippet,contentDetails,statistics',
       chart: 'mostPopular',
-      maxResults: '25',
+      maxResults: '24',
       regionCode: 'KR',
       key: process.env.YOUTUBE_API_KEY,
       ...(nextPageToken && { pageToken: nextPageToken }),
@@ -25,7 +25,7 @@ export default class ApiService {
     const { data } = await this.instance.get('/listByKeyword.json', {
       params: {
         part: 'snippet',
-        maxResults: '25',
+        maxResults: '24',
         regionCode: 'KR',
         q: searchQuery,
         key: process.env.YOUTUBE_API_KEY,
