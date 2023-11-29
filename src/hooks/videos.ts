@@ -5,7 +5,12 @@ import { youtubeService } from '../services/youtube/YoutubeService';
 import { Item } from '../types/videos';
 
 export function useInfiniteQueryFetchVideos() {
-  const { data: videos, fetchNextPage, hasNextPage } = useInfiniteQuery({
+  const {
+    data: videos,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useInfiniteQuery({
     queryKey: ['videos'],
     queryFn: ({ pageParam = '' }) => youtubeService.fetchVideosMostPopular(pageParam),
     initialPageParam: '',
@@ -17,7 +22,7 @@ export function useInfiniteQueryFetchVideos() {
   });
 
   const loadMoreVideos = () => {
-    if (hasNextPage) {
+    if (hasNextPage && !isFetchingNextPage) {
       fetchNextPage();
     }
   };
@@ -25,6 +30,8 @@ export function useInfiniteQueryFetchVideos() {
   return {
     videos: videos?.pages ?? [],
     loadMoreVideos,
+    hasNextPage,
+    isFetchingNextPage,
   };
 }
 
