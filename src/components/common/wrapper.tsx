@@ -1,5 +1,11 @@
+import { forwardRef } from 'react';
+
 import { PropsWithClasses } from '../types';
 
-export default function Wrapper({ children, className }: PropsWithClasses) {
-  return <div className={className}>{children}</div>;
-}
+const Wrapper = forwardRef<HTMLDivElement, PropsWithClasses>(
+  ({ className, children }, ref) => <div ref={ref} className={className}>{children}</div>,
+);
+
+Wrapper.displayName = 'Wrapper';
+
+export default Wrapper;
